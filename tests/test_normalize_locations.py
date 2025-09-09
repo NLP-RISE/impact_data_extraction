@@ -5,8 +5,8 @@ from normalize_locations import NormalizeLocation
 
 def refresh_fixture():
     norm = NormalizeLocation(
-        gadm_path="Database/data/gadm_world.csv",
-        unsd_path="Database/data/UNSD — Methodology.csv",
+        gadm_path="data/gadm_world.csv",
+        unsd_path="data/UNSD — Methodology.csv",
     )
     return norm
 
