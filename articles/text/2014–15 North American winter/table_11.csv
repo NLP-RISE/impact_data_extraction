@@ -1,0 +1,15 @@
+,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2015 USD),Deaths
+0,November Bering Sea cyclone,November 8 – 13,,,84 (135),920,,,"Bering Sea, Aleutian Islands, Russian Far East, Alaska, Contiguous United States",Unknown,
+1,Mid-November winter storm,November 13 – 21,,,,961,88 (223),,"Pacific Northwest, Central United States, Eastern United States, Northern Mexico, Eastern Canada, Southern Greenland, Iceland",$46 million,24
+2,Thanksgiving Week nor'easter,November 25 – 27,Category 1,1.756,,987,13 (33),,"Southeastern United States, Northeastern United States, New England, Atlantic Canada",Unknown,
+3,Early December nor'easter,December 8 – 11,Category 1,1.881,,990,27.5 (70),,Northeastern United States,Unknown,
+4,Mid-December storm complex,December 9 – 18,,,139 (224),960,,,"Continental United States, Southern Canada",Unknown,2
+5,Late January blizzard,January 24 – 28,Category 3,6.16,95 (153),970,36 (91),,"Pacific Northwest, Central United States, Eastern United States, Atlantic Canada, Southern Greenland, Portugal, Spain, France",$500 million,3
+6,Late January–early February blizzard,January 30 – February 2,Category 3,8.40,,978,24.1 (61),0.32 (8.1),"High Plains, Ohio Valley, Central United States, New England",Unknown,15
+7,Early February winter storm,February 8 – 10,Category 1,1.897,,,22 (56),,"Northeastern United States, Canada",Unknown,
+8,Mid-February blizzard,February 14 – 15,Category 1,1.14,,958,27.4 (70),,"Northeast United States, New England, Canada (partial)",Unknown,6
+9,February 25–26 Southeast winter storm,February 25 – 26,,,,985,12.7 (32),0.5 (13),"Southeastern United States (Texas, Louisiana, Mississippi, Alabama, Tennessee, Georgia), Northeast",Unknown,4
+10,Early March winter storm,March 1 – 5,,,,993,54.6 (139),0.25 (6.4),"Southwestern United States, High Plains, Upper Midwest, Southeastern United States, Northern Mexico, Northeastern United States",Unknown,4
+11,Early May storm complex,May 6 – 9,,,,985,24 (61),,Midwestern United States,Unknown,
+12,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates
+13,10 RSI storms,November 8 – May 9,,,,920,88 (100),0.5 (13),,≥ $546 million,57 (44)

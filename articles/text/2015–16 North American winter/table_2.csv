@@ -1,0 +1,11 @@
+,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2016 USD),Deaths
+0,Late November ice storm,November 25 – 27,,,,,12 (30),1 (25),Central United States,Unknown,17
+1,Post-Christmas storm complex,December 26 – 29,,,,989,41 (104),,"Southwestern, Central, and New England regions in the United States (particularly Texas); Northern Mexico; Southeastern Canada",>$3 billion,21
+2,Late January blizzard,January 21 – 23,Category 5,20.14,85 (135),983,42 (110),0.75 (19),"Pacific Northwest, Great Plains, South Central United States, Eastern United States (especially the Mid-Atlantic states), Atlantic Canada, British Isles, Finland",$500 million – $ 3 billion,55
+3,Early February winter storm,January 30 – February 7,Category 2,4.68,,,41 (100),,"Western United States, Central United States, Southeastern United States, Northeastern United States",Unknown,7
+4,Early February nor'easter,February 6 – 9,,,65 (105),976,11 (28),,"Northeastern United States, Atlantic Canada",Unknown,
+5,Late February tornado outbreak & winter storm,February 23 – 24,,,,,17 (43),0.7 (18),"Eastern United States, Canada",$1.2 billion,7
+6,Late March blizzard,March 21 – 25,,,,989,32.5 (83),,"Northeastern United States, Canada",Unknown,2
+7,Mid-April storm complex,April 16 – 17,,,,1006,51.3 (130),,Western United States (Rocky Mountains),Unknown,8
+8,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates
+9,3 RSI storms,November 20 – April 17,,,,976,51.3 (130),1.5 (38),,≥ $$4.7–7.2 billion,117

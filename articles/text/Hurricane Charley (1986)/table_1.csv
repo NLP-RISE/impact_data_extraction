@@ -1,0 +1,12 @@
+,Precipitation,Precipitation,Precipitation,Storm,Location,Ref.
+,Rank,mm,in,Storm,Location,Ref.
+0,1,150.0,5.91,Bertha 2014,"Inverness, Highland",[20]
+1,2,135.0,5.31,Charley 1986,"Abergwyngregyn, Gwynedd",[21]
+2,3,130.0,5.12,Nadine 2012,"Ravensworth, North Yorkshire",[22]
+3,4,76.0,2.99,Lili 1996,"Chale Bay, Isle of Wight",[23]
+4,5,61.7,2.43,Zeta 2020,"Chipping, Lancashire",[24]
+5,6,48.8,1.92,Grace 2009,"Capel Curig, Conwy",[25]
+6,7,42.2,1.66,Gordon 2006,"Wainfleet All Saints, Lincolnshire",[26]
+7,8,38.0,1.5,Gonzalo 2014,"Glenmoriston, Highland",[27]
+8,9,31.0,1.22,Bill 2009,"Shap, Cumbria",[28]
+9,10,30.0,1.18,Laura 2008,"Windermere, Cumbria",[29]

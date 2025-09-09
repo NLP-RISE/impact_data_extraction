@@ -1,0 +1,15 @@
+,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2022 USD),Deaths
+0,Mid-October winter storm,October 12 – 14,,,84 (135),988,28 (71),,"Intermountain West, Northern Plains, Canadian Prairies",$50 million,
+1,October 2021 Northeast Pacific bomb cyclone,October 24 – 26,,,159 (256),942,42 (110),,"Alaska, Western United States, Western Canada",>$400 million,2
+2,December tornado outbreak and winter storm,December 9 – 12,,,Unknown,974,36 (91),,"Western United States, Central United States, Midwestern United States, Eastern United States, Eastern Canada",Unknown,
+3,January 3-4 nor'easter,January 3-4,Category 1,2.325,,,15.5 (39),,Mid-Atlantic United States,$495 million,5
+4,January 4-7 nor'easter,January 4-7,Category 2.325,1,,968,17.7 (45),,"Tennessee, Kentucky, Northeastern United States",Unknown,1
+5,Mid-January winter storm,January 13 – 17,Category 2,3.407,91 (146),981,27.5 (70),0.50 (12.7),"South-central Canada, Northwestern United States, High Plains, Central, Southeastern United States, Northeastern United States",$600 million,5
+6,Late January blizzard,January 27 – 30,Category 1,2.295,99 (159),969,35.7 (91),,"Southeastern United States, Northeastern United States, Atlantic Canada",$50 million,4
+7,Early February winter storm,February 1 – 5,Category 2,5.476,Unknown,1004,37 (94),0.80 (20),"Central United States, Eastern United States, northern Mexico, Atlantic Canada",$250 million,7
+8,Mid-March winter storm,March 9 – 13,,,Unknown,Unknown,20 (51),,"Western United States, Central United States, Eastern United States, Atlantic Canada",Unknown,0
+9,Mid-April blizzard,April 11 – 14,,,Unknown,982,47 (120),,"Western United States, Atlantic Canada",Unknown,1
+10,April 2022 nor'easter,April 18-19,,,,990,18 (46),,Northeastern United States,$25 million,1
+11,Late May winter storm,May 20–21,,,Unknown,Unknown,24 (61),,Western United States,Unknown,Unknown
+12,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates,Season aggregates
+13,4 RSI storms,October 12 – May 21,,,,942,60 (150),0.80 (20),,≥ $1.97 billion,26 (10)
