@@ -1,12 +1,12 @@
 import pytest
 
 from normalizer.normalize_numbers import NormalizeNumber
-from normalizer.normalize_utils import NormalizeUtils
+from utils.spacy_utils import SpacyUtils
 
 
 def refresh_fixture():
-    utils = NormalizeUtils()
-    nlp = utils.load_spacy_model("en_core_web_trf")
+    spacy_utils = SpacyUtils()
+    nlp = spacy_utils.load_spacy_model("en_core_web_trf")
     norm = NormalizeNumber(nlp, locale_config="en_US.UTF-8")
     return nlp, norm
 

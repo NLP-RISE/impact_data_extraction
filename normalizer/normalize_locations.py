@@ -9,7 +9,7 @@ import pycountry
 import requests_cache
 from geopy.geocoders import Nominatim
 
-from .log_utils import Logging
+from utils.log_utils import Logging
 
 
 class NormalizeLocation:
