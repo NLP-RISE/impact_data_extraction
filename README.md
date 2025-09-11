@@ -11,8 +11,8 @@
 - Advanced prompting to handle multi-event articles in the same way as single-event articles
 
 ### TODOs
-- [ ] move relevant code
-- [ ] get clean annotations
+- [x] move relevant code
+- [x] get clean annotations
 - [ ] plot stats on clean annotations
 - [ ] benchmark some open source models on the exact same datasets before the double annotations and corrections + gpt4 + gpt5
 - [ ] implement simple CoT with open source models; proposed qwen and deepseek (maybe deepseek R)
