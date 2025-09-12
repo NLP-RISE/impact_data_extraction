@@ -1,25 +1,33 @@
 from outformer import Jsonformer, highlight_values
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from torch import float16
 
 # Initialize model and tokenizer
-model_name = "mistralai/Mixtral-8x7B-v0.1"
+model_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
 model = AutoModelForCausalLM.from_pretrained(
-    model_name,
-    device_map="balanced",
-    top_k=10,
-    do_sample=True,
+    model_name, device_map="balanced", top_k=10, do_sample=True, torch_dtype=float16
 )
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Create Jsonformer instance
-jsonformer = Jsonformer(model, tokenizer, max_tokens_string=1000, debug=False)
+jsonformer = Jsonformer(model, tokenizer, max_tokens_string=200, debug=False)
 
+number_of_shoes_schema = {
+    "type": "object",
+    "properties": {
+        "total_number_of_shoes": {
+            "type": "number",
+            "description": "What's the total number of shoes these ads are talking about",
+        },
+    },
+}
 # Define your JSON schema
 json_schema = {
     "type": "object",
     "properties": {
         "shoes": {
             "type": "array",
+            "minItems": 1,
             "items": {
                 "type": "object",
                 "properties": {
@@ -122,31 +130,26 @@ Ads:
 --------
 """
 
-print("..... temp 0")
-# Generate structured output
-generated_data = jsonformer.generate(
-    schema=json_schema, prompt=prompt, temperature=0.0, max_attempts=10
-)
-
-# Highlight generated values
-highlight_values(generated_data)
 
 print("..... temp 0.25")
 
+number_of_shoes = jsonformer.generate(
+    schema=number_of_shoes_schema,
+    prompt=f"Find the number of shoes in these ads: {ad}",
+    temperature=0.25,
+    max_attempts=10,
+)
+
+print("number_of_shoes", number_of_shoes)
+
+print(number_of_shoes["total_number_of_shoes"])
+
+print("modifying json schema....")
+json_schema["properties"]["shoes"]["minItems"] = int(number_of_shoes["total_number_of_shoes"])
+print(json_schema)
 # Generate structured output
 generated_data = jsonformer.generate(
     schema=json_schema, prompt=prompt, temperature=0.25, max_attempts=10
-)
-
-# Highlight generated values
-highlight_values(generated_data)
-
-print("..... temp 0.75")
-
-
-# Generate structured output
-generated_data = jsonformer.generate(
-    schema=json_schema, prompt=prompt,temperature=0.75, max_attempts=10
 )
 
 # Highlight generated values
