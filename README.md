@@ -15,5 +15,6 @@
 - [x] get clean annotations
 - [ ] plot stats on clean annotations
 - [ ] benchmark some open source models on the exact same datasets before the double annotations and corrections + gpt4 + gpt5
+- [x] solve the problem of clean json output
 - [ ] implement simple CoT with open source models; proposed qwen and deepseek (maybe deepseek R)
 - [ ] implement MAD CoT with open source models; compare results
