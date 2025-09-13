@@ -78,7 +78,7 @@ if __name__ == "__main__":
         return new_row
 
     raw_annotations = raw_annotations[
-        raw_annotations["Annotation Code"].isin(["1", "2", "3", "4", "5"])
+        raw_annotations["Annotation Code"].isin(["1", "2", "3", "4", "5", "0"])
     ]
     raw_annotations = raw_annotations.apply(fill_check_fields, axis=1)
     raw_annotations["Title"] = raw_annotations["Source"].map(article_map)
@@ -128,10 +128,10 @@ if __name__ == "__main__":
     correct_target_cols = chain(*[metadata_cols, supplemental_cols, data_cols])
     original_target_cols = chain(*[metadata_cols, supplemental_cols, data_cols_origial])
 
-    raw_annotations = raw_annotations.apply(find_events, axis=1)
-
+    corrected_annotations = raw_annotations.apply(find_events, axis=1)
+    corrected_annotations = corrected_annotations[corrected_annotations["Annotation Code"].isin(["1", "2", "3", "4", "5"])]
     # save correct annotations
-    raw_annotations[correct_target_cols].to_csv("annotations/annotations_corrected.csv")
+    corrected_annotations[correct_target_cols].to_csv("annotations/annotations_corrected.csv")
 
     original_annotations = raw_annotations[original_target_cols]
     original_columns_rename_map = {}
