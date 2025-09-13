@@ -21,7 +21,7 @@ class Normaliser:
             return round(float(v))
         except ValueError:
             try:
-                return text2num(v, lang="en", relaxed=True)
+                return text2num(v, lang="en")
             except ValueError:
                 return None
 

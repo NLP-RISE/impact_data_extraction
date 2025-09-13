@@ -1,5 +1,4 @@
-from .normaliser import Normaliser
-
+from evaluator.normaliser import Normaliser
 
 class Comparer:
     """Comparison module"""
@@ -14,7 +13,7 @@ class Comparer:
         # Strings
         string_cols = [
             "Main_Event",
-            "Event_ID",
+            "UUID",
             "Administrative_Area_Norm",
             "Country_Norm",
             "Location_Norm",
@@ -25,7 +24,7 @@ class Comparer:
 
         # Sequences
         self.sequence_columns: list = self.target_col(
-            ["Administrative_Areas_Norm", "Locations_Norm", "Event_Names", "Hazards"]
+            ["Administrative_Areas_Norm", "Locations", "Event_Names", "Hazards"]
         )
 
         # Dates
