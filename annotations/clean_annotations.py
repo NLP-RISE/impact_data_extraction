@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     supplemental_cols = [
         "GID(s)",  # list separated by | -- is a GID version of "Location"
-        "level"
+        "level",
     ]
 
     data_cols = [
@@ -84,8 +84,11 @@ if __name__ == "__main__":
     ]
     raw_annotations = raw_annotations.apply(fill_check_fields, axis=1)
     raw_annotations["Title"] = raw_annotations["Source"].map(article_map)
-    raw_annotations["Hazard"] = raw_annotations["Hazard"].apply(lambda x: x.split("|"))
     raw_annotations["GID(s)"] = raw_annotations["GID(s)"].apply(lambda x: x.split("|"))
+
+    for haz in ["Hazard", "Hazard_check"]:
+        raw_annotations[haz] = raw_annotations[haz].apply(lambda x: x.split("|"))
+
     for loc in ["Location", "Location_check"]:
         raw_annotations[loc] = raw_annotations[loc].apply(
             lambda x: x.split("|")
@@ -141,9 +144,9 @@ if __name__ == "__main__":
         "annotations/annotations_corrected.csv"
     )
     for level in ("main", "sub"):
-        corrected_annotations[correct_target_cols][corrected_annotations["level"] == level].to_csv(
-            f"annotations/annotations_corrected_{level}.csv"
-        )
+        corrected_annotations[correct_target_cols][
+            corrected_annotations["level"] == level
+        ].to_csv(f"annotations/annotations_corrected_{level}.csv")
 
     original_annotations = raw_annotations[original_target_cols]
     original_columns_rename_map = {}
