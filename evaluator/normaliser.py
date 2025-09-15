@@ -30,7 +30,9 @@ class Normaliser:
         Examples: " Yes" -> True, "0  " -> False, True -> True, "goat" -> None."""
         v = self.string(v)
         return (
-            True if v in {"1", "1.0", "yes", "y", "true"} else False if v in {"0", "0.0", "no", "n", "false"} else None
+            True
+            if v in {"1", "1.0", "yes", "y", "true"}
+            else False if v in {"0", "0.0", "no", "n", "false"} else None
         )
 
     def sequence(self, v):

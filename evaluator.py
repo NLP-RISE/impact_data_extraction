@@ -3,8 +3,8 @@ from evaluator.comparer import Comparer
 from evaluator.weights import default_weights
 import argparse
 import pandas as pd
-import pathlib 
-import json 
+import pathlib
+import json
 
 if __name__ == "__main__":
     pd.options.display.max_columns = 999
@@ -15,7 +15,7 @@ if __name__ == "__main__":
         dest="system_output",
         help="The full path to the system output in parquet",
         type=str,
-        default="annotations/annotations_original.csv"
+        default="annotations/annotations_original.csv",
     )
 
     parser.add_argument(
@@ -23,7 +23,7 @@ if __name__ == "__main__":
         dest="gold_set",
         help="The full path to the gold set in parquet",
         type=str,
-        default="annotations/annotations_corrected.csv"
+        default="annotations/annotations_corrected.csv",
     )
 
     parser.add_argument(
@@ -32,7 +32,7 @@ if __name__ == "__main__":
         dest="model_name",
         help="A model name to store the results",
         type=str,
-        default="test"
+        default="test",
     )
 
     parser.add_argument(
@@ -76,11 +76,15 @@ if __name__ == "__main__":
 
     all_comps = pd.DataFrame(
         [[i, j, c, d] + list(a.values()) for [i, j, (c, d), a] in comps],
-        columns=["UUID1", "UUID2", "Coverage", "Weighted_Score"] + list(default_weights.keys()),
+        columns=["UUID1", "UUID2", "Coverage", "Weighted_Score"]
+        + list(default_weights.keys()),
     ).replace({float("nan"): None})
 
     all_comps.sort_values("Weighted_Score")
-    all_comps.to_csv("weighted_scores.csv",index=False,)
+    all_comps.to_csv(
+        "weighted_scores.csv",
+        index=False,
+    )
 
     averages = {}
     for i in all_comps.columns:
@@ -92,9 +96,11 @@ if __name__ == "__main__":
 
     # get average per event_ID when evaluating specific instances
     all_comps["UUID"] = all_comps["UUID1"].apply(lambda x: x.split("-")[0])
-    all_comps.groupby("UUID")[[c for c in all_comps.columns if not c.startswith("UUID")]].mean().to_csv(
-            "avg_per_event_id_results.csv",
-            index=False,
-        )
+    all_comps.groupby("UUID")[
+        [c for c in all_comps.columns if not c.startswith("UUID")]
+    ].mean().to_csv(
+        "avg_per_event_id_results.csv",
+        index=False,
+    )
 
     logger.info(f"Done!")

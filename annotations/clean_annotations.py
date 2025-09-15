@@ -127,19 +127,23 @@ if __name__ == "__main__":
         return new_row
 
     correct_target_cols = list(chain(*[metadata_cols, supplemental_cols, data_cols]))
-    original_target_cols = list(chain(*[metadata_cols, supplemental_cols, data_cols_origial]))
+    original_target_cols = list(
+        chain(*[metadata_cols, supplemental_cols, data_cols_origial])
+    )
 
     corrected_annotations = raw_annotations.apply(find_events, axis=1)
-    corrected_annotations = corrected_annotations[corrected_annotations["Annotation Code"].isin(["1", "2", "3", "4", "5"])]
+    corrected_annotations = corrected_annotations[
+        corrected_annotations["Annotation Code"].isin(["1", "2", "3", "4", "5"])
+    ]
     # save correct annotations
-    corrected_annotations[correct_target_cols].to_csv("annotations/annotations_corrected.csv")
-    print(original_target_cols)
+    corrected_annotations[correct_target_cols].to_csv(
+        "annotations/annotations_corrected.csv"
+    )
     original_annotations = raw_annotations[original_target_cols]
     original_columns_rename_map = {}
     for i in original_target_cols:
         original_columns_rename_map[i] = i.replace("_check", "")
 
-    print("original_columns_rename_map", original_columns_rename_map)
     original_annotations.rename(columns=original_columns_rename_map, inplace=True)
 
     original_annotations.to_csv("annotations/annotations_original.csv")
