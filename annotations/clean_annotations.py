@@ -33,6 +33,7 @@ if __name__ == "__main__":
 
     supplemental_cols = [
         "GID(s)",  # list separated by | -- is a GID version of "Location"
+        "level"
     ]
 
     data_cols = [
@@ -63,7 +64,7 @@ if __name__ == "__main__":
         "Insured_Damage_Inflation_Adjusted_Year",
         "Damage_Min",
         "Damage_Max",
-        "Damage_Units",
+        "Damage_Unit",
         "Damage_Inflation_Adjusted",
         "Damage_Inflation_Adjusted_Year",
     ]
@@ -139,6 +140,11 @@ if __name__ == "__main__":
     corrected_annotations[correct_target_cols].to_csv(
         "annotations/annotations_corrected.csv"
     )
+    for level in ("main", "sub"):
+        corrected_annotations[correct_target_cols][corrected_annotations["level"] == level].to_csv(
+            f"annotations/annotations_corrected_{level}.csv"
+        )
+
     original_annotations = raw_annotations[original_target_cols]
     original_columns_rename_map = {}
     for i in original_target_cols:
@@ -147,3 +153,8 @@ if __name__ == "__main__":
     original_annotations.rename(columns=original_columns_rename_map, inplace=True)
 
     original_annotations.to_csv("annotations/annotations_original.csv")
+
+    for level in ("main", "sub"):
+        original_annotations[original_annotations["level"] == level].to_csv(
+            f"annotations/annotations_original_{level}.csv"
+        )
