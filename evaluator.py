@@ -91,6 +91,10 @@ if __name__ == "__main__":
         if not i.startswith("UUID"):
             averages[i] = all_comps.loc[:, i].mean()
 
+    avg_df = pd.DataFrame([averages]).T
+    avg_plot_ax = avg_df.plot(kind="bar", ylim=[0, 0.5])
+    avg_plot_fig = avg_plot_ax.get_figure()
+    avg_plot_fig.savefig(f"{output_dir}/average_scores_plot.png", dpi=300, bbox_inches = "tight")
     with open(f"{output_dir}/average_scores.json", "w") as f:
         json.dump(averages, f, indent=3)
 
