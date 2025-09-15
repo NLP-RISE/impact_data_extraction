@@ -32,7 +32,7 @@ if __name__ == "__main__":
         dest="model_name",
         help="A model name to store the results",
         type=str,
-        default="test",
+        default="double_annotations_all",
     )
 
     parser.add_argument(
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     all_comps.sort_values("Weighted_Score")
     all_comps.to_csv(
-        "weighted_scores.csv",
+        f"{output_dir}/weighted_scores.csv",
         index=False,
     )
 
@@ -91,15 +91,14 @@ if __name__ == "__main__":
         if not i.startswith("UUID"):
             averages[i] = all_comps.loc[:, i].mean()
 
-    with open("average_scores.json", "w") as f:
+    with open(f"{output_dir}/average_scores.json", "w") as f:
         json.dump(averages, f, indent=3)
 
     # get average per event_ID when evaluating specific instances
     all_comps["UUID"] = all_comps["UUID1"].apply(lambda x: x.split("-")[0])
     all_comps.groupby("UUID")[
         [c for c in all_comps.columns if not c.startswith("UUID")]
-    ].mean().to_csv(
-        "avg_per_event_id_results.csv",
+    ].mean().to_csv(f"{output_dir}/avg_per_event_id_results.csv",
         index=False,
     )
 
