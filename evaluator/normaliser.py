@@ -21,8 +21,8 @@ class Normaliser:
             return round(float(v))
         except ValueError:
             try:
-                return text2num(v, lang="en")
-            except ValueError:
+                return text2num(v, lang="en", relaxed=True)
+            except (ValueError, TypeError):
                 return None
 
     def boolean(self, v):

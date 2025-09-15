@@ -24,7 +24,7 @@ class Comparer:
 
         # Sequences
         self.sequence_columns: list = self.target_col(
-            ["Administrative_Areas_Norm", "Locations", "Event_Names", "Hazards"]
+            ["Location", "Event_Name", "Hazard"]
         )
 
         # Dates
@@ -38,7 +38,7 @@ class Comparer:
                 for k in [
                     x
                     for x in self.target_columns
-                    if "_Date_" in x
+                    if "Start_" in x or "End_" in x
                     or x.endswith("_Min")
                     or x.endswith("_Max")
                     or x.endswith("_Inflation_Adjusted_Year")

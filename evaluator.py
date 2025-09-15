@@ -4,8 +4,10 @@ from evaluator.weights import default_weights
 import argparse
 import pandas as pd
 import pathlib 
+import json 
 
 if __name__ == "__main__":
+    pd.options.display.max_columns = 999
     logger = Logging.get_logger("evaluator")
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -53,10 +55,10 @@ if __name__ == "__main__":
     sys = sys.sort_values("UUID")
     gold = gold.sort_values("UUID")
 
-    comp = Comparer(args.null_penalty, target_columns=default_weights.keys())
-    print(default_weights.keys())
-    print(sys.columns)
+    sys = sys.replace({float("nan"): None})
+    gold = gold.replace({float("nan"): None})
 
+    comp = Comparer(args.null_penalty, target_columns=default_weights.keys())
 
     sys_data = sys[list(default_weights.keys())].to_dict(orient="records")
     gold_data = gold[list(default_weights.keys())].to_dict(orient="records")
@@ -78,5 +80,21 @@ if __name__ == "__main__":
     ).replace({float("nan"): None})
 
     all_comps.sort_values("Weighted_Score")
+    all_comps.to_csv("weighted_scores.csv",index=False,)
 
-    print(all_comps)
+    averages = {}
+    for i in all_comps.columns:
+        if not i.startswith("UUID"):
+            averages[i] = all_comps.loc[:, i].mean()
+
+    with open("average_scores.json", "w") as f:
+        json.dump(averages, f, indent=3)
+
+    # get average per event_ID when evaluating specific instances
+    all_comps["UUID"] = all_comps["UUID1"].apply(lambda x: x.split("-")[0])
+    all_comps.groupby("UUID")[[c for c in all_comps.columns if not c.startswith("UUID")]].mean().to_csv(
+            "avg_per_event_id_results.csv",
+            index=False,
+        )
+
+    logger.info(f"Done!")
