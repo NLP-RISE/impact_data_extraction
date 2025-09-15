@@ -10,7 +10,7 @@ model = AutoModelForCausalLM.from_pretrained(
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Create Jsonformer instance
-jsonformer = Jsonformer(model, tokenizer, max_tokens_string=200, debug=False)
+jsonformer = Jsonformer(model, tokenizer, max_tokens_string=200, debug=True)
 
 number_of_shoes_schema = {
     "type": "object",
