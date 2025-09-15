@@ -1,5 +1,6 @@
 from evaluator.normaliser import Normaliser
 
+
 class Comparer:
     """Comparison module"""
 
@@ -38,7 +39,8 @@ class Comparer:
                 for k in [
                     x
                     for x in self.target_columns
-                    if "Start_" in x or "End_" in x
+                    if "Start_" in x
+                    or "End_" in x
                     or x.endswith("_Min")
                     or x.endswith("_Max")
                     or x.endswith("_Inflation_Adjusted_Year")
@@ -48,7 +50,10 @@ class Comparer:
 
         # Booleans
         self.boolean_columns: list = [
-            k for k in self.target_col([x for x in self.target_columns if x.endswith("_Inflation_Adjusted")])
+            k
+            for k in self.target_col(
+                [x for x in self.target_columns if x.endswith("_Inflation_Adjusted")]
+            )
         ]
 
     def target_col(self, l) -> list:
@@ -137,7 +142,9 @@ class Comparer:
         Items with weight 0 are ignored."""
         p = dict([(k, s) for (k, s) in self.all(v, w).items() if weights[k] != 0])
         u = [weights[k] * s for (k, s) in p.items() if s != None]
-        return 1.0 - len(u) / len(p) if len(p) != 0 else None, (sum(u) / len(u) if len(u) != 0 else None)
+        return 1.0 - len(u) / len(p) if len(p) != 0 else None, (
+            sum(u) / len(u) if len(u) != 0 else None
+        )
 
     def relevance(self, vv, ww, weights):
         """Measure how events in vv are represented by events in ww.
