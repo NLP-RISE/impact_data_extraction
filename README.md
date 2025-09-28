@@ -20,3 +20,11 @@
 - [ ] implement MAD CoT with open source models; compare results
 - [ ] implement RAG for GADM to enable GID prediction by an LLM (preferably one that has also seen a lot of wikipedia or country data)
 - [ ] consolidate double annotations with previous ones
+
+
+### Candidate models
+
+| Model | Notes |
+|-------|-------|
+| mistralai/Mixtral-8x7B-Instruct-v0.1 | works well out of the box |
+| google/gemma-7b-it | ??? |
