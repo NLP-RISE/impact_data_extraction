@@ -6,7 +6,7 @@
 - Evaluation set that we are able to modify without affecting work on the main Wikimpacts repo
 
 ### Goals
-- Implement JSON output using ~LangChain~ outformer
+- Implement JSON output using ~~LangChain~~ outformer
 - Experiment with CoT and MAD for impact data extraction
 - Advanced prompting to handle multi-event articles in the same way as single-event articles
 
