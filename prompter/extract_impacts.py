@@ -3,6 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from torch import float16
 import os
 import pandas as pd
+from prompts import LOCATION_PROMPT, LOCATION_SOURCE_PROMPT, INJURED_PROMPT, INJURED_SOURCE_PROMPT, DEATHS_PROMPT, DEATHS_SOURCE_PROMPT, MAIN_EVENT_PROMPT, MAIN_EVENT_CATEGORIES
 
 # Initialize model and tokenizer
 model_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
@@ -12,7 +13,7 @@ model = AutoModelForCausalLM.from_pretrained(
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Create Jsonformer instance
-jsonformer = Jsonformer(model, tokenizer, max_tokens_string=200, debug=True)
+jsonformer = Jsonformer(model, tokenizer, max_tokens_string=200, debug=False)
 
 event_list_json_schema = {
     "type": "object",
@@ -25,44 +26,36 @@ event_list_json_schema = {
                 "properties": {
                     "Main_Event": {
                         "type": "string",
-                        "enum": [
-                            "Flood",
-                            "Extratropical Storm/Cyclone",
-                            "Tropical Storm/Cyclone",
-                            "Extreme Temperature",
-                            "Drought",
-                            "Wildfire",
-                            "Tornado",
-                        ],
-                        "description": "Choose the type of the main event.",
+                        "enum": MAIN_EVENT_CATEGORIES,
+                        "description": MAIN_EVENT_PROMPT,
                     },
                     "Location": {
                         "type": "array",
                         "minItems": 1,
                         "items": {"type": "string"},
-                        "description": "The location in which the event occurred. Use the official name of the area if available.",
+                        "description": LOCATION_PROMPT,
                     },
                     "Location_source": {
                         "type": "array",
                         "minItems": 1,
                         "items": {"type": "string"},
-                        "description": "Specify the row number where you found information showing the location of this event.",
+                        "description": LOCATION_SOURCE_PROMPT,
                     },
                     "Injured": {
                         "type": "string",
-                        "description": "Some number or range that represents the number of people who were harmed, injured, or hospitalized due to the event. This number doesn't include people who died. Example: 'at least 200'",
+                        "description": INJURED_PROMPT,
                     },
                     "Injured_source": {
                         "type": "string",
-                        "description": "Specify the row number where you found information showing the number of injured people in this events",
+                        "description": INJURED_SOURCE_PROMPT ,
                     },
                     "Deaths": {
                         "type": "string",
-                        "description": "Some number or range that represents the number of people who were killed due to the event. Example: 'more than 4'",
+                        "description": DEATHS_PROMPT ,
                     },
                     "Deaths_source": {
                         "type": "string",
-                        "description": "Specify the row number where you found information showing the number of dead people in this events'",
+                        "description": DEATHS_SOURCE_PROMPT,
                     },
                 },
             },
@@ -86,6 +79,7 @@ for file in event_files:
 
 
 prompt = f"Extract all incidents of deaths and injuries as well as the location that occured due to the n atural disaster {event_name}. Be accurate and return answers verbatim. Extract the answers ONLY using the text below:\n{text}"
+print(prompt)
 
 generated_data = jsonformer.generate(
     schema=event_list_json_schema, prompt=prompt, temperature=0.25, max_attempts=10
