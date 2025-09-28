@@ -3,7 +3,16 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from torch import float16
 import os
 import pandas as pd
-from prompts import LOCATION_PROMPT, LOCATION_SOURCE_PROMPT, INJURED_PROMPT, INJURED_SOURCE_PROMPT, DEATHS_PROMPT, DEATHS_SOURCE_PROMPT, MAIN_EVENT_PROMPT, MAIN_EVENT_CATEGORIES
+from prompts import (
+    LOCATION_PROMPT,
+    LOCATION_SOURCE_PROMPT,
+    INJURED_PROMPT,
+    INJURED_SOURCE_PROMPT,
+    DEATHS_PROMPT,
+    DEATHS_SOURCE_PROMPT,
+    MAIN_EVENT_PROMPT,
+    MAIN_EVENT_CATEGORIES,
+)
 
 # Initialize model and tokenizer
 model_name = "mistralai/Mixtral-8x7B-Instruct-v0.1"
@@ -29,37 +38,61 @@ event_list_json_schema = {
                         "enum": MAIN_EVENT_CATEGORIES,
                         "description": MAIN_EVENT_PROMPT,
                     },
-                    "Location": {
+                    # treat this as a single object to enforce proper completion where each location has a source
+                    "Location_block": {
                         "type": "array",
                         "minItems": 1,
-                        "items": {"type": "string"},
-                        "description": LOCATION_PROMPT,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "Location": {
+                                    "type": "string",
+                                    "description": LOCATION_PROMPT,
+                                },
+                                "Location_source": {
+                                    "type": "string",
+                                    "description": LOCATION_SOURCE_PROMPT,
+                                },
+                            },
+                        },
                     },
-                    "Location_source": {
+                    "Deaths_block": {
                         "type": "array",
                         "minItems": 1,
-                        "items": {"type": "string"},
-                        "description": LOCATION_SOURCE_PROMPT,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "Deaths": {
+                                    "type": "string",
+                                    "description": DEATHS_PROMPT,
+                                },
+                                "Deaths_source": {
+                                    "type": "string",
+                                    "description": DEATHS_SOURCE_PROMPT,
+                                },
+                            },
+                        },
                     },
-                    "Injured": {
-                        "type": "string",
-                        "description": INJURED_PROMPT,
-                    },
-                    "Injured_source": {
-                        "type": "string",
-                        "description": INJURED_SOURCE_PROMPT ,
-                    },
-                    "Deaths": {
-                        "type": "string",
-                        "description": DEATHS_PROMPT ,
-                    },
-                    "Deaths_source": {
-                        "type": "string",
-                        "description": DEATHS_SOURCE_PROMPT,
+                    "Injured_block": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "Injured": {
+                                    "type": "string",
+                                    "description": INJURED_PROMPT,
+                                },
+                                "Injured_source": {
+                                    "type": "string",
+                                    "description": INJURED_SOURCE_PROMPT,
+                                },
+                            },
+                        },
                     },
                 },
             },
-        }
+        },
     },
 }
 
@@ -75,7 +108,8 @@ for file in event_files:
     filename = file.split("/")[-1].replace(".csv", "")
     with open(file, "r") as content_file:
         content = content_file.read()
-        text += f"Event_name: {filename}\n\n{content}\n-------------------\n"
+
+        text += f"Event name: {event_name}\nCollection: {filename}\n\n{content}\n-------------------\n"
 
 prompt = f"Extract all incidents of deaths and injuries as well as the location that occured due to the natural disaster {event_name}. Be accurate and return answers verbatim. Extract the answers ONLY using the text below:\n{text}"
 print(prompt)
