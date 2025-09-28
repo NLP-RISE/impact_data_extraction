@@ -75,10 +75,9 @@ for file in event_files:
     filename = file.split("/")[-1].replace(".csv", "")
     with open(file, "r") as content_file:
         content = content_file.read()
-        text += f"{filename}\n{content}\n-------------------\n"
+        text += f"Event_name: {filename}\n\n{content}\n-------------------\n"
 
-
-prompt = f"Extract all incidents of deaths and injuries as well as the location that occured due to the n atural disaster {event_name}. Be accurate and return answers verbatim. Extract the answers ONLY using the text below:\n{text}"
+prompt = f"Extract all incidents of deaths and injuries as well as the location that occured due to the natural disaster {event_name}. Be accurate and return answers verbatim. Extract the answers ONLY using the text below:\n{text}"
 print(prompt)
 
 generated_data = jsonformer.generate(
