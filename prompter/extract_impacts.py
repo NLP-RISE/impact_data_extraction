@@ -29,7 +29,7 @@ event_list_json_schema = {
     "properties": {
         "events": {
             "type": "array",
-            "minItems": 1,
+            "minItems": 4,
             "items": {
                 "type": "object",
                 "properties": {
