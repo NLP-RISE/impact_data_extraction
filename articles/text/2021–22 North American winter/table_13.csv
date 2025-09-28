@@ -1,4 +1,4 @@
-,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2022 USD),Deaths
+index,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2022 USD),Deaths
 0,Mid-October winter storm,October 12 – 14,,,84 (135),988,28 (71),,"Intermountain West, Northern Plains, Canadian Prairies",$50 million,
 1,October 2021 Northeast Pacific bomb cyclone,October 24 – 26,,,159 (256),942,42 (110),,"Alaska, Western United States, Western Canada",>$400 million,2
 2,December tornado outbreak and winter storm,December 9 – 12,,,Unknown,974,36 (91),,"Western United States, Central United States, Midwestern United States, Eastern United States, Eastern Canada",Unknown,

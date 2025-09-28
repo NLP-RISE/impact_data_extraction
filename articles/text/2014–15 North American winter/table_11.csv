@@ -1,4 +1,4 @@
-,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2015 USD),Deaths
+index,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2015 USD),Deaths
 0,November Bering Sea cyclone,November 8 – 13,,,84 (135),920,,,"Bering Sea, Aleutian Islands, Russian Far East, Alaska, Contiguous United States",Unknown,
 1,Mid-November winter storm,November 13 – 21,,,,961,88 (223),,"Pacific Northwest, Central United States, Eastern United States, Northern Mexico, Eastern Canada, Southern Greenland, Iceland",$46 million,24
 2,Thanksgiving Week nor'easter,November 25 – 27,Category 1,1.756,,987,13 (33),,"Southeastern United States, Northeastern United States, New England, Atlantic Canada",Unknown,

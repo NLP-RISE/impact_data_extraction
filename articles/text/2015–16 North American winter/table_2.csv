@@ -1,4 +1,4 @@
-,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2016 USD),Deaths
+index,Event name,Dates active,RSI category,RSI value,Highest gust mph (km/h),Minimum pressure (mbar),Maximum snow in (cm),Maximum ice in (mm),Areas affected,Damage (2016 USD),Deaths
 0,Late November ice storm,November 25 – 27,,,,,12 (30),1 (25),Central United States,Unknown,17
 1,Post-Christmas storm complex,December 26 – 29,,,,989,41 (104),,"Southwestern, Central, and New England regions in the United States (particularly Texas); Northern Mexico; Southeastern Canada",>$3 billion,21
 2,Late January blizzard,January 21 – 23,Category 5,20.14,85 (135),983,42 (110),0.75 (19),"Pacific Northwest, Great Plains, South Central United States, Eastern United States (especially the Mid-Atlantic states), Atlantic Canada, British Isles, Finland",$500 million – $ 3 billion,55

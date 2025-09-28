@@ -1,4 +1,4 @@
-,Country,State/province/department,Fatalities,Missing,Damage (in USD)
+index,Country,State/province/department,Fatalities,Missing,Damage (in USD)
 0,Venezuela,Capital District,7[17],0,Unknown
 1,Venezuela,Sucre,1[17],0,Unknown
 2,Nicaragua,-,70[18],0,$10.2 million[19]
