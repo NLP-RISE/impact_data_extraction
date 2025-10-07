@@ -29,7 +29,7 @@ event_list_json_schema = {
     "properties": {
         "events": {
             "type": "array",
-            "minItems": 4,
+            "minItems": 2,
             "items": {
                 "type": "object",
                 "properties": {
@@ -38,7 +38,7 @@ event_list_json_schema = {
                         "enum": MAIN_EVENT_CATEGORIES,
                         "description": MAIN_EVENT_PROMPT,
                     },
-                    # treat this as a single object to enforce proper completion where each location has a source
+                    # treat this as a single object to enforce proper completion where each location/impact has a source
                     "Location_block": {
                         "type": "array",
                         "minItems": 1,
