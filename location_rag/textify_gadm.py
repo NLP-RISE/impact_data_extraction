@@ -59,13 +59,13 @@ def textify(row):
             text += f'{row["NAME_0"]} is part of the {row["REGION"]} region. '
 
     if not pd.isna(row["GOVERNEDBY"]):
-        text += f'{row["NAME_0"]} (GID: {row["GID_0"]}) is governed by {row["GOVERNEDBY"]} (GID: {get_gid_0(row["GOVERNEDBY"])}). '
+        text += f'{row["NAME_0"]} (GID: {row["GID_0"]}) is governed by {row["GOVERNEDBY"]} {get_top_gid(row["GOVERNEDBY"])}. '
 
     if not pd.isna(row["DISPUTEDBY"]):
-        text += f'{row["NAME_0"]} (GID: {row["GID_0"]}) is disputed by {row["DISPUTEDBY"]} (GID: {get_gid_0(row["DISPUTEDBY"])}). '
+        text += f'{row["NAME_0"]} (GID: {row["GID_0"]}) is disputed by {row["DISPUTEDBY"]} {get_top_gid(row["DISPUTEDBY"])}. '
 
     if not pd.isna(row["SOVEREIGN"]):
-        text += f'{row["NAME_0"]} (GID: {row["GID_0"]}) is under the sovereignty of {row["SOVEREIGN"]} (GID: {get_gid_0(row["SOVEREIGN"])}). '
+        text += f'{row["NAME_0"]} (GID: {row["GID_0"]}) is under the sovereignty of {row["SOVEREIGN"]} {get_top_gid(row["SOVEREIGN"])}. '
 
     return text
 
@@ -76,16 +76,21 @@ gadm = pd.read_csv(
 gadm_chunked = pd.read_csv("data/gadm_world.csv", chunksize=1000)
 
 
-def get_gid_0(name: str) -> str | None:
+def get_top_gid(name: str) -> str | None:
     """Returns a country GID by its name"""
     try:
-        gid_0 = list(set(gadm.loc[gadm["NAME_0"] == name]["GID_0"]))
-        assert len(gid_0) == 1
-        return gid_0[0]
+        # special case for the UK!
+        if name in list(set(gadm.loc[gadm["NAME_0"] == "United Kingdom"]["NAME_1"])):
+            gid = list(set(gadm.loc[gadm["NAME_1"] == name]["GID_1"]))
+        else:
+            gid = list(set(gadm.loc[gadm["NAME_0"] == name]["GID_0"]))
+        assert len(gid) == 1
+        return f"(GID: {gid[0]})"
     except:
-        return None
+        # If missing, return nothing!
+        return ""
 
 
 for i in tqdm(gadm_chunked, desc="chunks"):
     i["text"] = i.progress_apply(textify, axis=1)
-    i["text"].to_csv("gadm_text.csv", index=False, mode="a")
+    i["text"].to_csv("data/gadm_world_textual.csv", index=False, mode="a")
