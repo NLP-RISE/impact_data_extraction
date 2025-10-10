@@ -10,7 +10,7 @@ from outformer import Jsonformer, highlight_values
 encoder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 # Sample knowledge base documents
-documents = pd.read_csv("gadm_test.csv")["text"]
+documents = pd.read_csv("data/gadm_world_textual.csv")["text"]
 print("loaded documents")
 
 # Generate embeddings
@@ -46,32 +46,29 @@ model = AutoModelForCausalLM.from_pretrained(
     model_name, device_map="balanced", top_k=10, do_sample=True, torch_dtype=float16
 )
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-
 jsonformer = Jsonformer(model, tokenizer, max_tokens_string=200, debug=False)
 
 gid_schema = {
     "type": "object",
     "properties": {
-        "gids": {
+        "location_information": {
             "type": "array",
             "minItems": 1,
-            "description": """Return a list of GIDs that represent the region or area or city mentioned in the prompt sentence. 
-
-    Examples:
-
-    QUERY: "A flood had hit Tifra and Tichi in the past week" 
-    Output: ["DZA.8.44_1", "DZA.8.43_1"]
-    
-    QUERY: "Rescue teams were heading to the Midlands in Zimbabwe"
-    Output: ["ZWE.10_1"]
-
-    If the area overlaps several GIDs, mention all GIDs. Must be a valid GID.
-    """,
-            # Examples of valid GIDs: ZWE.10.13_2, or AFG.1_1, or DZA.6.57_1, Z03.28_1, or even just ALB.
             "items": {
-                "type": "string",
+                "type": "object",
+                "properties": {
+                    "location_name": {
+                        "type": "string",
+                        "description": "The name of the location, as mentioned in the text exactly",
+                    },
+                    "GID": {
+                        "type": "array",
+                        "minItems": 1,
+                        "description": "A list containing one or more GIDs to describe this location extracted from the sentence.",
+                    },
+                },
             },
-        }
+        },
     },
 }
 
@@ -81,10 +78,31 @@ def generate_response(query, retrieved_docs):
     # Combine retrieved documents
     print("retrieved_docs")
     print(retrieved_docs)
-    context = " ".join(retrieved_docs)
+    context = " ".join(retrieved_docs).strip()
 
     # Create input prompt
-    prompt = f"Some information on locations: {context}.\n Now, respond to this query with a comma-separated valid Python-type list of GIDs with no duplicates.\n QUERY: {query}"
+    # Make example more advanced soon
+    prompt = f"""You will be given a passage with information about different locations and their special ID code (called 'GID'). As input, you will take in one or more location names or sometimes a sentence describing the impacts of some natural disaster on human societies in one or more locations. Your task is to extract each location name and find the best GID that describes it based on the CONTEXT.
+    
+    Examples of successful output: 
+    
+    QUERY: "due to the heatwave, two casualties were recorded in Nothern Togo" 
+    OUTPUT: {{
+        "location_information": [{{"location_name": "Nothern Togo", "GID": ["TGO"]}}] 
+    }}
+
+    QUERY: "two injuries were recorded in Paris, 3 more in the Pays de la Loire region" 
+    OUTPUT: {{
+        "location_information": [
+                {{"location_name": "Paris", "GID": ["FRA.8.3_1"]}}, 
+                {{"location_name": "Pays de la Loire", "GID": ["FRA.12_1"]}}
+                                ] 
+    }}
+
+    
+    CONTEXT: {context}\n
+    QUERY: {query}
+    """
 
     print("prompt:")
     print(prompt)
